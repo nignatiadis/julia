@@ -157,8 +157,13 @@ typedef struct {
         // still be old dead objects in the page.
         uint16_t has_young: 1;
     };
-    uint16_t nfree; // number of free objects in this page.
-                    // invalid if pool that owns this page is allocating objects from this page.
+    // number of old objects in this page
+    uint16_t nold;
+    // number of old objects in this page during the previoius full sweep
+    uint16_t prev_nold;
+    // number of free objects in this page.
+    // invalid if pool that owns this page is allocating objects from this page.
+    uint16_t nfree;
     uint16_t osize; // size of each object in this page
     uint16_t fl_begin_offset; // offset of first free object in this page
     uint16_t fl_end_offset;   // offset of last free object in this page
